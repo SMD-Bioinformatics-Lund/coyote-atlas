@@ -11,7 +11,12 @@ readme = "README.md"
 license = "GPL-3.0-only"
 license-files = ["LICENSE.txt", "COPYRIGHT.txt", "NOTICE.txt"]
 authors = [{ name = "Ram Nanduri" }]
-dependencies = ["coyote-core==4.0.0", "httpx==0.28.1"]
+dependencies = ["coyote-core @ git+https://github.com/SMD-Bioinformatics-Lund/coyote3.git@7ed86eb95cf61e27d33f96c615064650ce137ca7#subdirectory=core", "httpx==0.28.1"]
+
+[project.urls]
+Repository = "https://github.com/SMD-Bioinformatics-Lund/coyote-atlas"
+Documentation = "https://github.com/SMD-Bioinformatics-Lund/coyote-atlas/blob/dev/docs/README.md"
+Issues = "https://github.com/SMD-Bioinformatics-Lund/coyote-atlas/issues"
 
 [project.optional-dependencies]
 api = ["coyote-server==1.0.0"]

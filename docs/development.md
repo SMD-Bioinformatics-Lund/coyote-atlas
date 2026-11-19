@@ -5,7 +5,8 @@ documentation, license notices and coverage settings. Editable installation
 makes Python source changes available without rebuilding a wheel:
 
 ```bash
-uv pip install -e 'services/atlas[test,api]'
+uv venv
+uv pip install -e '.[test]'
 ```
 
 From this package directory, using the activated development environment:
@@ -16,7 +17,9 @@ python -m pytest tests/unit tests/smoke -q
 python -m pytest --cov=coyote_atlas --cov-report=term-missing
 ```
 
-The API suite uses a synthetic FastAPI host and mocked persistence. It requires
+For the API suite, first install the selected Coyote server and its dependencies
+from the application's reviewed wheel set. The API suite uses a synthetic FastAPI
+host and mocked persistence. It requires
 the optional API dependencies and explicit synthetic host configuration; it
 never needs a running MongoDB. Package tests do not import another package's
 test helpers. Coverage includes all Atlas production source and uses the
@@ -45,3 +48,11 @@ caller update reviewed data there, then regenerates and validates the inventory.
 An exception leaves an unapproved review copy. This operation neither publishes
 a package nor installs database records. Repository VEP maintenance commands use
 this workflow with explicit `--output-bundle` and `--bundle-version` arguments.
+
+## Releases
+
+Changes target `dev`. After reviewing reference provenance and validating the
+built artifact against the selected application, prepare a release PR into `main`.
+Use immutable `vMAJOR.MINOR.PATCH` tags and retain the wheel checksum. Publication
+to PyPI is not part of the workflow. The application adopts a reviewed full Atlas
+Git commit and records it in its lockfile and external artifact metadata.

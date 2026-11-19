@@ -1,0 +1,2 @@
+# Editable source with the package-owned synthetic tests.
+-e .[test]

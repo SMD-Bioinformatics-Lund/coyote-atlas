@@ -2,6 +2,9 @@
 
 ## v1.0.0
 
+- Maintain Atlas in its own repository with a reviewed Core Git dependency,
+  standalone package checks and explicit application adoption.
+
 - Use HTTPX directly for authenticated reference publication without installing
   the independent Python client.
 

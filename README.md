@@ -14,7 +14,7 @@
 
 **Documentation:** [Read the guides](docs/README.md)
 
-**Source Code:** [SMD-Bioinformatics-Lund/coyote3](https://github.com/SMD-Bioinformatics-Lund/coyote3)
+**Source Code:** [SMD-Bioinformatics-Lund/coyote-atlas](https://github.com/SMD-Bioinformatics-Lund/coyote-atlas)
 
 ---
 
@@ -28,10 +28,11 @@ server's existing administrator authorization, audit and preservation rules.
 Installation is explicit; package imports and application startup do not write
 reference data.
 
-From the repository root:
+From this repository:
 
 ```bash
-uv sync --all-packages
+uv venv
+uv pip install -e .
 .venv/bin/coyote-atlas inspect
 .venv/bin/coyote-atlas validate
 ```

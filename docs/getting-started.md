@@ -1,48 +1,47 @@
 # Installation
 
-Python 3.12 or newer is required. Choose the checkout instructions when working
-in this repository, or release wheels for an independent installation.
+Atlas requires Python 3.12 or newer. Its base installation includes the reviewed
+Core library and HTTPX; it does not install the Coyote server or connect to a database.
 
-## Use the source checkout
+## Use this checkout
 
-Run from the repository root:
+From the Atlas repository root:
 
 ```bash
-uv sync --all-packages
+uv venv
+uv pip install -e .
 .venv/bin/coyote-atlas inspect
 .venv/bin/coyote-atlas validate
 ```
 
-`inspect` displays the bundle identity and datasets. `validate` checks the
-packaged resources and exits successfully only if their integrity and contracts
-are valid. Neither command needs a running application.
+The Core Git dependency selects an exact application commit and its `core`
+subdirectory. No Coyote package needs to be published to PyPI for this installation.
+`inspect` displays bundle identity and datasets; `validate` checks resource
+integrity and contracts. Neither command needs a running application.
 
-## Install from release wheels
+## Install reviewed wheels
 
-Use your organization's reviewed artifact directory, containing Atlas and its
-core and third-party dependencies. Replace `/path/to/wheels` with that
-directory. Public PyPI publication is not required.
+Use an organization-provided wheel set with Atlas and its reviewed Core and
+third-party dependencies. Install that dependency set first, then the Atlas wheel:
 
 ```bash
-python -m pip install --no-index --find-links /path/to/wheels coyote-atlas==1.0.0
+python -m pip install --no-deps /path/to/wheels/coyote_atlas-1.0.0-py3-none-any.whl
+python -m pip check
 coyote-atlas inspect
 coyote-atlas validate
 ```
 
-These commands need no environment file, MongoDB, FastAPI or running Coyote
-server. The package carries its data; the current working directory does not
+The package carries its reference data. The current working directory does not
 select a different reference source.
 
 ## Add Atlas to a server
 
-The standard application image already includes Atlas. For a separately installed
-server, expose reference planning and installation routes by installing Atlas with the
-server and restart that API using your normal deployment procedure:
+The standard Coyote application includes an explicitly pinned Atlas artifact.
+For a separately installed server, install the matching reviewed Atlas wheel into
+its environment and restart the API through the normal deployment procedure.
+The optional `api` extra declares the server dependency for package resolvers;
+unpublished server artifacts must come from the reviewed application release.
 
-```bash
-python -m pip install --no-index --find-links /path/to/wheels 'coyote-atlas[api]==1.0.0'
-```
-
-The server discovers `coyote.api.routers` and `coyote.reference_bundles` entries.
-Installation makes routes available; it does not populate collections. Use the
-[reviewed installation workflow](usage.md) when reference installation is intended.
+The server discovers the `coyote.api.routers` and `coyote.reference_bundles` entry
+points. Installation makes reference routes available; it does not populate or
+replace database records. Follow [usage](usage.md) for explicit reference installation.
