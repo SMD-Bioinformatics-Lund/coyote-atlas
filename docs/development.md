@@ -46,13 +46,15 @@ Maintainer workflows can use `coyote_atlas.authoring.draft_bundle(output, versio
 as a context manager. It copies packaged resources to a new directory, lets the
 caller update reviewed data there, then regenerates and validates the inventory.
 An exception leaves an unapproved review copy. This operation neither publishes
-a package nor installs database records. Repository VEP maintenance commands use
+a package nor installs database records. The application repository's VEP maintenance commands use
 this workflow with explicit `--output-bundle` and `--bundle-version` arguments.
 
 ## Releases
 
-Changes target `dev`. After reviewing reference provenance and validating the
-built artifact against the selected application, prepare a release PR into `main`.
+Create an issue and a focused branch from `dev`; open the change PR into `dev`.
+After reviewing reference provenance and validating the built artifact against the
+selected application, open a release PR from `dev` into `main`. Merge only after
+explicit release approval. Tag that merged commit and create its GitHub release.
 Use immutable `vMAJOR.MINOR.PATCH` tags and retain the wheel checksum. Publication
 to PyPI is not part of the workflow. The application adopts a reviewed full Atlas
 Git commit and records it in its lockfile and external artifact metadata.

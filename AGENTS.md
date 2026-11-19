@@ -22,9 +22,15 @@ application owns database initialization, authentication, authorization and audi
 - Use repository-relative paths. Keep credentials, private exports and temporary
   development files out of source control. Operate only within this checkout and
   resources explicitly authorized for the task.
-- Develop on focused branches from dev. Main is reserved for approved releases.
+- Create an issue, then develop on a focused branch from `dev`. Open its PR into
+  `dev`; open release PRs from `dev` into `main`. Main is reserved for approved releases.
   Changelog headings, release names and tags use vMAJOR.MINOR.PATCH; package
   metadata uses the unprefixed version. Do not publish to PyPI or merge into main
   without explicit approval.
 - Preserve GPL-3.0-only and all reference-data notices. GitHub changes require
   authorization. Deployment-server access remains explicitly authorized and read-only.
+
+Protected branch updates and PR-review bypass are reserved for `ramsainanduri`.
+Both `dev` and `main` require one approval, dismiss stale approvals and require
+resolved review conversations. Administrators are included in protection; force
+pushes and branch deletion remain disabled.
